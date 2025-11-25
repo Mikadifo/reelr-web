@@ -4,6 +4,7 @@ import HomePage from "@pages/HomePage";
 import RegisterPage from "@pages/RegisterPage";
 import LoginPage from "@pages/LoginPage";
 import MainLayout from "./layouts/MainLayout";
+import MoviesPage from "@pages/MoviesPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
 
       <Route element={<MainLayout />}>
         <Route index element={<HomePage />} />
+        <Route path="/movies" element={<MoviesPage />} />
       </Route>
     </Routes>
   );
