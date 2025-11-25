@@ -1,25 +1,41 @@
 import { Form, Formik } from "formik";
-import * as Yup from "yup";
+import { BASE_URL } from "../constants";
 import Logo from "@assets/logo.svg?react";
 import Input from "./Input";
 import Button from "./Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import loginSchema from "@schemas/login.schema";
+import { useState } from "react";
+import axios from "axios";
+import Alert from "./Alert";
 
 function LoginForm() {
-  const schema = Yup.object({
-    username: Yup.string()
-      .min(3, "Username must be at least 3 characters")
-      .matches(
-        /^[a-zA-Z0-9_]+$/,
-        "Only letters, numbers and underscores allowed",
-      )
-      .required("Username is required"),
-    password: Yup.string().required("Password is required"),
+  const navigate = useNavigate();
+  const [alert, setAlert] = useState({
+    open: false,
+    message: "",
+    severity: "success",
   });
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    console.log("submitting...");
+  const handleSubmit = async (values) => {
+    try {
+      const res = await axios.post(`${BASE_URL}/auth/login`, values);
+      const token = res.data.token;
+
+      if (token) {
+        localStorage.setItem("token", token);
+      }
+
+      navigate("/movies");
+    } catch (error) {
+      const response = error.response;
+
+      setAlert({
+        open: true,
+        message: response.data.error || "Something went wrong",
+        severity: "error",
+      });
+    }
   };
 
   return (
@@ -28,7 +44,7 @@ function LoginForm() {
         username: "",
         password: "",
       }}
-      validationSchema={schema}
+      validationSchema={loginSchema}
       onSubmit={handleSubmit}
     >
       {({ errors, touched }) => {
@@ -78,6 +94,8 @@ function LoginForm() {
                 </Link>
               </div>
             </div>
+
+            <Alert alert={alert} setAlert={setAlert} />
           </Form>
         );
       }}

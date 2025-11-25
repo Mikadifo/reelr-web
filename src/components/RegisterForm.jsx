@@ -1,26 +1,36 @@
 import { Form, Formik } from "formik";
-import * as Yup from "yup";
+import Alert from "./Alert";
+import axios from "axios";
 import Logo from "@assets/logo.svg?react";
 import Input from "./Input";
 import Button from "./Button";
-import { Link } from "react-router-dom";
+import registerSchema from "@schemas/register.schema";
+import { BASE_URL } from "../constants";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function RegisterForm() {
-  const schema = Yup.object({
-    username: Yup.string()
-      .min(3, "Username must be at least 3 characters")
-      .matches(
-        /^[a-zA-Z0-9_]+$/,
-        "Only letters, numbers and underscores allowed",
-      )
-      .required("Username is required"),
-    email: Yup.string().email("Invalid email").required("Email is required"),
-    password: Yup.string().required("Required"),
+  const navigate = useNavigate();
+  const [alert, setAlert] = useState({
+    open: false,
+    message: "",
+    severity: "success",
   });
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    console.log("submitting...");
+  const handleSubmit = async (values) => {
+    try {
+      await axios.post(`${BASE_URL}/auth/register`, values);
+
+      navigate("/login");
+    } catch (error) {
+      const response = error.response;
+
+      setAlert({
+        open: true,
+        message: response.data.error || "Something went wrong",
+        severity: "error",
+      });
+    }
   };
 
   return (
@@ -30,7 +40,7 @@ function RegisterForm() {
         email: "",
         password: "",
       }}
-      validationSchema={schema}
+      validationSchema={registerSchema}
       onSubmit={handleSubmit}
     >
       {({ errors, touched }) => {
@@ -89,6 +99,8 @@ function RegisterForm() {
                 </Link>
               </div>
             </div>
+
+            <Alert alert={alert} setAlert={setAlert} />
           </Form>
         );
       }}
