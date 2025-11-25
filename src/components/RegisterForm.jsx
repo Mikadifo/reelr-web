@@ -14,7 +14,7 @@ function RegisterForm() {
         "Only letters, numbers and underscores allowed",
       )
       .required("Username is required"),
-    email: Yup.string().email("Invalid email").required("Required"),
+    email: Yup.string().email("Invalid email").required("Email is required"),
     password: Yup.string().required("Required"),
   });
 
