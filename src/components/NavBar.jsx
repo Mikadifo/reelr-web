@@ -2,6 +2,12 @@ import Logo from "@assets/logo.svg?react";
 import Button from "./Button";
 
 function NavBar() {
+  const user = localStorage.getItem("token");
+
+  const handleActionButtonClick = () => {
+    localStorage.removeItem("token");
+  };
+
   return (
     <header className="sticky top-0 flex justify-between py-4">
       <div className="flex gap-2 items-center">
@@ -11,8 +17,8 @@ function NavBar() {
         </span>
       </div>
 
-      <Button link to="/login">
-        Login
+      <Button link to="/login" onClick={handleActionButtonClick}>
+        {user ? "Logout" : "Login"}
       </Button>
     </header>
   );
