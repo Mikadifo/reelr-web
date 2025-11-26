@@ -6,6 +6,7 @@ import LoginPage from "@pages/LoginPage";
 import MainLayout from "./layouts/MainLayout";
 import MoviesPage from "@pages/MoviesPage";
 import PrivateMovieDetailPage from "@pages/PrivateMovieDetailPage";
+import PublicMovieDetailPage from "@pages/PublicMovieDetailPage";
 
 function App() {
   return (
@@ -17,7 +18,10 @@ function App() {
         <Route index element={<HomePage />} />
         <Route path="/movies" element={<MoviesPage />} />
         <Route path="/login" element={<LoginPage />} />
-
+        <Route
+          path="/movies/:username/:id"
+          element={<PublicMovieDetailPage />}
+        />
         <Route path="/movies/:id" element={<PrivateMovieDetailPage />} />
       </Route>
     </Routes>

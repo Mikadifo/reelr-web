@@ -4,8 +4,7 @@ import Share from "@assets/icons/share.svg?react";
 import Delete from "@assets/icons/delete.svg?react";
 import Add from "@assets/icons/add.svg?react";
 import Remove from "@assets/icons/cross.svg?react";
-import StarFill from "@assets/icons/starFill.svg?react";
-import StarOutline from "@assets/icons/starOutline.svg?react";
+import MovieDetailHeader from "./MovieDetailHeader";
 
 function PrivateMovieDetail({ movie }) {
   return (
@@ -20,32 +19,7 @@ function PrivateMovieDetail({ movie }) {
 
       <div className="flex flex-col justify-between w-full max-w-2xl">
         <div className="flex gap-16 flex-col">
-          <div className="flex justify-between items-center">
-            <div className="flex flex-col gap-1 text-white">
-              <h1 className="font-bold font-heading text-5xl">{movie.name}</h1>
-              <h2 className="text-white-accent font-bold text-3xl">
-                <span>{movie.genre}</span> - <span>{movie.year}</span>
-              </h2>
-            </div>
-
-            <div className="flex">
-              {new Array(movie.rating ? 5 : 0)
-                .fill(null)
-                .map((_, index) =>
-                  index < movie.rating ? (
-                    <StarFill key={index} className="size-8" />
-                  ) : (
-                    <StarOutline key={index} className="size-8" />
-                  ),
-                )}
-
-              {movie.rating === null && (
-                <div className="text-white-accent text-base font-bold">
-                  <span>Not Watched</span>
-                </div>
-              )}
-            </div>
-          </div>
+          <MovieDetailHeader {...movie} />
 
           <div className="flex justify-between text-white">
             <div className="flex flex-col gap-4">
