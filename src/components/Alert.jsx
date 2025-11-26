@@ -3,7 +3,7 @@ import CloseIcon from "@assets/icons/cross.svg?react";
 function Alert({ alert, setAlert }) {
   return (
     <div
-      className={`${alert.severity === "error" ? "bg-red text-white" : "bg-green text-dark"} font-body px-6 py-3 rounded-2xl whitespace-nowrap absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-4`}
+      className={`${alert.severity === "error" ? "bg-red text-white" : "bg-green text-dark"} font-body px-6 py-3 rounded-2xl whitespace-nowrap absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-4 z-40`}
       hidden={!alert.open}
     >
       <span>{alert.message}</span>

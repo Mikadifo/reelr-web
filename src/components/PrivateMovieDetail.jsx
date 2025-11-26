@@ -1,12 +1,22 @@
 import Button from "@components/Button";
+import FormMovieDialog from "./FormMovieDialog";
 import Edit from "@assets/icons/edit.svg?react";
 import Share from "@assets/icons/share.svg?react";
 import Delete from "@assets/icons/delete.svg?react";
 import Add from "@assets/icons/add.svg?react";
 import Remove from "@assets/icons/cross.svg?react";
 import MovieDetailHeader from "./MovieDetailHeader";
+import { useRef } from "react";
 
-function PrivateMovieDetail({ movie }) {
+function PrivateMovieDetail({ movie, setMovie }) {
+  const dialogRef = useRef(null);
+
+  const openDialog = () => {
+    if (dialogRef.current) {
+      dialogRef.current.showModal();
+    }
+  };
+
   return (
     <section className="flex gap-16 font-body justify-center mt-24">
       <img
@@ -57,7 +67,10 @@ function PrivateMovieDetail({ movie }) {
         </div>
 
         <div className="flex gap-4">
-          <Button className="bg-cyan! flex gap-2 size-fit text-white">
+          <Button
+            className="bg-cyan! flex gap-2 size-fit text-white"
+            onClick={openDialog}
+          >
             Edit
             <Edit className="size-[22px]" />
           </Button>
@@ -71,6 +84,13 @@ function PrivateMovieDetail({ movie }) {
           </Button>
         </div>
       </div>
+
+      <FormMovieDialog
+        dialogRef={dialogRef}
+        {...movie}
+        setMovie={setMovie}
+        isPublic={movie.public}
+      />
     </section>
   );
 }

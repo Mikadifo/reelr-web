@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import ConfirmationDialog from "./AddMovieDialog";
+import FormMovieDialog from "./FormMovieDialog";
 import Add from "@assets/icons/add.svg?react";
 
 function AddMovieButton() {
@@ -25,7 +25,7 @@ function AddMovieButton() {
         <p className="text-white font-heading text-lg font-bold">Add Movie</p>
       </div>
 
-      <ConfirmationDialog dialogRef={dialogRef} />
+      <FormMovieDialog dialogRef={dialogRef} />
     </>
   );
 }

@@ -50,7 +50,7 @@ function PrivateMovieDetailPage() {
 
   return (
     <>
-      <PrivateMovieDetail movie={movie} />
+      <PrivateMovieDetail movie={movie} setMovie={setMovie} />
       <Alert alert={alert} setAlert={setAlert} />
     </>
   );

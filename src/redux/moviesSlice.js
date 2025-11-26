@@ -10,5 +10,10 @@ export const moviesSlice = createSlice({
     addMovie: function (state, action) {
       return [...state, action.payload];
     },
+    updateMovie: function (state, action) {
+      return state.map((movie) =>
+        movie.id == action.payload.id ? action.payload : movie,
+      );
+    },
   },
 });
