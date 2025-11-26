@@ -50,12 +50,15 @@ function LoginForm() {
       {({ errors, touched }) => {
         return (
           <Form className="text-white p-16 rounded-2xl bg-dark-06 w-fit">
-            <div className="flex gap-2 items-center mb-4 justify-center">
+            <Link
+              to="/"
+              className="flex gap-2 items-center mb-4 justify-center"
+            >
               <Logo className="size-8" />
               <span className="font-heading text-white font-bold text-3xl">
                 Reelr
               </span>
-            </div>
+            </Link>
 
             <h1 className="font-heading font-bold text-center text-2xl mb-10">
               Welcome Back!
