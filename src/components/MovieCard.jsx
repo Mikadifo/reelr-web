@@ -22,7 +22,7 @@ function MovieCard({ name, rating, img }) {
             ),
           )}
 
-        {rating ?? (
+        {rating === null && (
           <div className="flex gap-1 text-white-accent font-body items-center text-sm">
             <span>Not Watched</span>
           </div>

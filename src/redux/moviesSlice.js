@@ -7,5 +7,8 @@ export const moviesSlice = createSlice({
     setMovies: function (_, action) {
       return action.payload;
     },
+    addMovie: function (_, action) {
+      return [...state, action.payload];
+    },
   },
 });
