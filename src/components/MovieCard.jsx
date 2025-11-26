@@ -10,7 +10,9 @@ function MovieCard({ name, rating, img }) {
         className="w-[120px] h-[170px] object-cover rounded-2xl cursor-pointer transition-transform duration-300 ease-out
     transform hover:scale-105"
       />
-      <p className="text-white font-heading text-lg font-bold">{name}</p>
+      <p className="text-white font-heading text-lg font-bold truncate w-[120px]">
+        {name}
+      </p>
       <div className="flex flex-nowrap">
         {new Array(rating ? 5 : 0)
           .fill(null)

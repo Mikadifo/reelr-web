@@ -21,15 +21,12 @@ function ConfirmationDialog({ dialogRef, open = false }) {
   const { addMovie: newMovie } = moviesSlice.actions;
 
   const handleSubmit = async (values, { resetForm }) => {
-    console.log(values, "<- inserting...");
     await addMovie(values, resetForm);
   };
 
   async function addMovie(movie, resetForm) {
     try {
       const res = await api.post("/movies", movie);
-
-      console.log(res);
 
       setAlert({
         open: true,
