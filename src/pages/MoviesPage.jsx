@@ -51,7 +51,7 @@ function MoviesPage() {
       const { data } = response;
 
       dispatch(
-        addList({ id: 0, name: "Not in a list", movies: data, default: true }),
+        addList({ id: 0, name: "Not in a list", movies: data, unlisted: true }),
       );
     } catch (error) {
       const response = error.response;
@@ -69,7 +69,7 @@ function MoviesPage() {
   return (
     <div>
       {lists.map((list) => (
-        <MovieList {...list} isMain={list.default} key={list.id} />
+        <MovieList {...list} key={list.id} />
       ))}
 
       <Alert alert={alert} setAlert={setAlert} />

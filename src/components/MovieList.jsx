@@ -4,7 +4,7 @@ import MovieCard from "./MovieCard";
 import Arrow from "@assets/icons/arrow.svg?react";
 import Menu from "@assets/icons/menu.svg?react";
 
-function MovieList({ movies, name, isMain = false }) {
+function MovieList({ movies, name, unlisted = false }) {
   const [sectionHidden, hideSection] = useState(false);
 
   return (
@@ -21,7 +21,7 @@ function MovieList({ movies, name, isMain = false }) {
           <h1>{name}</h1>
         </button>
 
-        {!isMain && (
+        {!unlisted && (
           <button type="button" className="cursor-pointer">
             <Menu className={"size-7"} />
           </button>
