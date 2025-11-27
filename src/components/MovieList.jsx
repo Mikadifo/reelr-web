@@ -2,7 +2,7 @@ import { useState } from "react";
 import AddMovieButton from "./AddMovieButton";
 import MovieCard from "./MovieCard";
 import Arrow from "@assets/icons/arrow.svg?react";
-import Menu from "@assets/icons/menu.svg?react";
+import ListOptions from "./ListOptions";
 
 function MovieList({ id, movies, name, unlisted = false }) {
   const [sectionHidden, hideSection] = useState(false);
@@ -21,11 +21,7 @@ function MovieList({ id, movies, name, unlisted = false }) {
           <h1>{name}</h1>
         </button>
 
-        {!unlisted && (
-          <button type="button" className="cursor-pointer">
-            <Menu className={"size-7"} />
-          </button>
-        )}
+        {!unlisted && <ListOptions listId={id} name={name} />}
       </div>
 
       <div className="flex flex-wrap gap-9" hidden={sectionHidden}>

@@ -110,7 +110,7 @@ function FormListDialog({ dialogRef, open = false, id = null, name = "" }) {
               </button>
 
               <h1 className="font-heading font-bold text-center text-2xl mb-10">
-                Create List
+                {id ? "Update" : "Create"} List
               </h1>
 
               <div className="flex flex-col gap-6">
@@ -126,7 +126,7 @@ function FormListDialog({ dialogRef, open = false, id = null, name = "" }) {
               </div>
 
               <Button type="submit" className="w-full bg-green! mt-12">
-                {id ? "Upate List" : "Add List"}
+                {id ? "Upate" : "Add"} List
               </Button>
             </Form>
           );
