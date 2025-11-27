@@ -3,15 +3,22 @@ import Home from "@assets/icons/home.svg?react";
 import Add from "@assets/icons/add.svg?react";
 import Logout from "@assets/icons/logout.svg?react";
 import Button from "@components/Button";
+import { useRef } from "react";
+import FormListDialog from "@components/FormListDialog";
 
 function NavBar() {
   const user = localStorage.getItem("token");
+  const formDialogRef = useRef(null);
 
   const logout = () => {
     localStorage.removeItem("token");
   };
 
-  const addList = async () => {};
+  const openFormDialog = () => {
+    if (formDialogRef.current) {
+      formDialogRef.current.showModal();
+    }
+  };
 
   return (
     <header className="sticky top-0 z-40 bg-dark/85 backdrop-blur-3xl">
@@ -28,6 +35,7 @@ function NavBar() {
               link
               to="/movies"
               className="py-2! mx-auto my-auto flex gap-1 items-center w-fit bg-cyan! text-white"
+              onClick={openFormDialog}
             >
               <Add className="size-[22px]" />
               Create List
@@ -50,6 +58,8 @@ function NavBar() {
           </Button>
         )}
       </nav>
+
+      <FormListDialog dialogRef={formDialogRef} />
     </header>
   );
 }

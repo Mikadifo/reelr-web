@@ -8,13 +8,20 @@ export const listsSlice = createSlice({
       return action.payload;
     },
     addList: function (state, action) {
-      const exists = state.some((list) => list.id === action.payload.id);
+      const newList = action.payload;
+      const exists = state.some((list) => list.id === newList.id);
 
       if (exists) {
         return state;
       }
 
-      return [...state, action.payload];
+      const unlistedIndex = state.findIndex((list) => list.unlisted);
+
+      if (unlistedIndex === -1) {
+        return [...state, newList];
+      }
+
+      state.splice(unlistedIndex, 0, newList);
     },
     updateMovie: function (state, action) {
       return state.map((movie) =>

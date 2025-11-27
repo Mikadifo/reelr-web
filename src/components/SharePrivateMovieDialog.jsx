@@ -75,7 +75,7 @@ function SharePrivateMovieDialog({
     <dialog
       ref={dialogRef}
       open={open}
-      className="bg-dark-06 rounded-2xl absolute top-1/2 left-1/2 -translate-1/2 z-20 backdrop:backdrop-brightness-50 backdrop:backdrop-blur-md text-center"
+      className="bg-dark-06 rounded-2xl fixed top-1/2 left-1/2 -translate-1/2 z-20 backdrop:backdrop-brightness-50 backdrop:backdrop-blur-md text-center"
     >
       <div className="text-white rounded-2xl bg-dark-06 w-[556px] p-16 relative">
         <button
