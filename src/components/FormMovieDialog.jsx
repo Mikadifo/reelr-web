@@ -8,7 +8,7 @@ import Close from "@assets/icons/cross.svg?react";
 import VisibilitySwitch from "./VisibilitySwitch";
 import RatingInput from "./RatingInput";
 import api from "./../axiosConfig";
-import { moviesSlice } from "@redux/moviesSlice";
+import { listsSlice } from "@redux/listsSlice";
 import { useDispatch } from "react-redux";
 
 function ConfirmationDialog({
@@ -29,7 +29,7 @@ function ConfirmationDialog({
     severity: "success",
   });
   const dispatch = useDispatch();
-  const { addMovie: newMovie } = moviesSlice.actions;
+  const { addMovieToList } = listsSlice.actions;
 
   const handleSubmit = async (values, { resetForm }) => {
     await addMovie(values, resetForm);
@@ -52,7 +52,7 @@ function ConfirmationDialog({
       });
 
       if (!id) {
-        dispatch(newMovie(res.data));
+        dispatch(addMovieToList(res.data));
       }
 
       setMovie(res.data);

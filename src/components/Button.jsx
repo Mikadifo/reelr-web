@@ -11,7 +11,7 @@ function Button({
   to = "",
   ...props
 }) {
-  const styles = `rounded-full bg-white text-dark font-bold px-6 py-2 text-base font-body cursor-pointer ${className} hover:opacity-95`;
+  const styles = `rounded-full bg-white text-dark font-bold px-6 py-2 text-base font-body cursor-pointer ${className} hover:opacity-90`;
 
   if (link) {
     return (

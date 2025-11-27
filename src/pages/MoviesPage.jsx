@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Alert from "@components/Alert";
-import { moviesSlice } from "@redux/moviesSlice";
+import { listsSlice } from "@redux/listsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import MovieList from "@components/MovieList";
 import api from "./../axiosConfig";
@@ -11,35 +11,67 @@ function MoviesPage() {
     message: "",
     severity: "success",
   });
-  const movieList = useSelector((state) => state.movies);
+  const lists = useSelector((state) => state.lists);
   const dispatch = useDispatch();
-  const { setMovies } = moviesSlice.actions;
+  const { setLists, addList } = listsSlice.actions;
 
   useEffect(() => {
-    getMovies();
+    const fetch = async () => {
+      await getLists();
+      await getUnlistedMovies();
+    };
+
+    fetch();
   }, []);
 
-  async function getMovies() {
+  async function getLists() {
     try {
-      const response = await api.get("/movies");
+      const response = await api.get("/lists");
 
       const { data } = response;
 
-      dispatch(setMovies(data));
+      dispatch(setLists(data));
     } catch (error) {
-      console.error("Something went wrong", error);
+      const response = error.response;
+
       setAlert({
         open: true,
-        message: "Something went wrong",
+        message: response.data.error || "Something went wrong fetching lists",
         severity: "error",
       });
-      dispatch(setMovies([]));
+
+      dispatch(setLists([]));
+    }
+  }
+
+  async function getUnlistedMovies() {
+    try {
+      const response = await api.get("/movies/unlisted");
+
+      const { data } = response;
+
+      dispatch(
+        addList({ id: 0, name: "Not in a list", movies: data, default: true }),
+      );
+    } catch (error) {
+      const response = error.response;
+
+      setAlert({
+        open: true,
+        message:
+          response.data.error ||
+          "Something went wrong fetching unlisted movies",
+        severity: "error",
+      });
     }
   }
 
   return (
     <div>
-      <MovieList movies={movieList} name={"Your movies"} isMain />
+      {lists.map((list) => (
+        <MovieList {...list} isMain={list.default} key={list.id} />
+      ))}
+
       <Alert alert={alert} setAlert={setAlert} />
     </div>
   );

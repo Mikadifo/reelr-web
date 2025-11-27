@@ -1,5 +1,6 @@
 import Logo from "@assets/logo.svg?react";
 import Home from "@assets/icons/home.svg?react";
+import Add from "@assets/icons/add.svg?react";
 import Logout from "@assets/icons/logout.svg?react";
 import Button from "@components/Button";
 
@@ -9,6 +10,8 @@ function NavBar() {
   const logout = () => {
     localStorage.removeItem("token");
   };
+
+  const addList = async () => {};
 
   return (
     <header className="sticky top-0 z-40 bg-dark/85 backdrop-blur-3xl">
@@ -24,8 +27,12 @@ function NavBar() {
             <Button
               link
               to="/movies"
-              className="p-2! mx-auto my-auto hover:bg-white/80"
+              className="py-2! mx-auto my-auto flex gap-1 items-center w-fit bg-cyan! text-white"
             >
+              <Add className="size-[22px]" />
+              Create List
+            </Button>
+            <Button link to="/movies" className="p-2! mx-auto my-auto">
               <Home className="size-[22px]" />
             </Button>
             <Button
