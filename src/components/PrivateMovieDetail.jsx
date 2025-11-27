@@ -5,12 +5,12 @@ import FormMovieDialog from "./FormMovieDialog";
 import Edit from "@assets/icons/edit.svg?react";
 import Share from "@assets/icons/share.svg?react";
 import Delete from "@assets/icons/delete.svg?react";
-import Add from "@assets/icons/add.svg?react";
 import Remove from "@assets/icons/cross.svg?react";
 import MovieDetailHeader from "./MovieDetailHeader";
 import { useRef, useState } from "react";
 import DeleteMovieDialog from "./DeleteMovieDialog";
 import SharePrivateMovieDialog from "./SharePrivateMovieDialog";
+import AddToListInput from "./AddToListInput";
 
 function PrivateMovieDetail({ movie, setMovie }) {
   const [alert, setAlert] = useState({
@@ -133,10 +133,11 @@ function PrivateMovieDetail({ movie, setMovie }) {
                 </span>
               )}
 
-              <button className="cursor-pointer text-base px-6 py-2 border-2 border-dark-06 rounded-full flex gap-2 w-fit items-center">
-                <Add className="size-5" />
-                Add to list
-              </button>
+              <AddToListInput
+                movie={movie}
+                setAlert={setAlert}
+                setMovie={setMovie}
+              />
             </div>
 
             <div className="flex flex-col gap-4">
